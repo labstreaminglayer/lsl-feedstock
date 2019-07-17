@@ -25,11 +25,10 @@ requirements:
     - {{ compiler("cxx") }}
     - git
     - ninja
-  host:
 
 tests:
   commands:
-    - lslver
+  - lslver
 
 about:
   home: https://github.com/sccn/liblsl
