@@ -6,7 +6,7 @@ jobs:
   pool:
     vmImage: 'windows-2019'
   steps:
-  - template: ci/azure_build_steps.yml
+  - template: azure_build_steps.yml
 - job: macOS
   pool:
     vmImage: 'macOS-10.13'
@@ -17,4 +17,4 @@ jobs:
       tar -xf MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk.tar.xz
       printf "CONDA_BUILD_SYSROOT:\n  - $PWD/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk\n" > conda_build_config.yaml
     displayName: 'Install ancient OS X SDK'
-  - template: ci/azure_build_steps.yml
+  - template: azure_build_steps.yml
