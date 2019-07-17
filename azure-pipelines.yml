@@ -1,0 +1,20 @@
+jobs:
+- job: Linux
+  steps:
+  - template: azure_build_steps.yml
+- job: Windows
+  pool:
+    vmImage: 'windows-2019'
+  steps:
+  - template: ci/azure_build_steps.yml
+- job: macOS
+  pool:
+    vmImage: 'macOS-10.13'
+  steps:
+  - bash: |
+      export MACOSX_DEPLOYMENT_TARGET=10.9
+      curl -L -O https://github.com/phracker/MacOSX-SDKs/releases/download/10.13/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk.tar.xz
+      tar -xf MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk.tar.xz
+      printf "CONDA_BUILD_SYSROOT:\n  - $PWD/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk\n" > conda_build_config.yaml
+    displayName: 'Install ancient OS X SDK'
+  - template: ci/azure_build_steps.yml

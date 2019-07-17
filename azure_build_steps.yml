@@ -1,0 +1,9 @@
+steps:
+  - task: CondaEnvironment@1
+    inputs:
+      packageSpecs: conda-build
+    displayName: set up anaconda
+  - bash: conda build . --output-folder condaoutput
+    displayName: 'build conda package'
+  - publish: condaoutput
+    artifact: '$(Agent.JobName)_conda'
