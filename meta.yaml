@@ -16,15 +16,8 @@ build:
   - echo "MACOSX_DEPLOYMENT_TARGET=${MACOSX_DEPLOYMENT_TARGET}" # [osx]
   - echo "CONDA_BUILD_SYSROOT=${CONDA_BUILD_SYSROOT}" # [osx]
   - mkdir build
-  - |
-    cmake -DCMAKE_OSX_SYSROOT={{ CONDA_BUILD_SYSROOT }} \
-    -DLSL_UNIXFOLDERS=1 \
-    -DCMAKE_INSTALL_PREFIX:PATH="{{ PREFIX }}" \
-    -DCMAKE_INSTALL_RPATH:PATH="{{ PREFIX }}/lib" \
-    -Dlslgitrevision={{ version }} \
-    -Dlslgitbranch=master \
-    -S . -B build -G Ninja
-  - 'cmake --build build -j --target install'
+  - cmake -DCMAKE_OSX_SYSROOT={{ CONDA_BUILD_SYSROOT }} -DLSL_UNIXFOLDERS=1 -DCMAKE_INSTALL_PREFIX:PATH="{{ PREFIX }}" -DCMAKE_INSTALL_RPATH:PATH="{{ PREFIX }}/lib" -Dlslgitrevision={{ version }} -Dlslgitbranch=master -S . -B build -G Ninja
+  - cmake --build build -j --target install
 
 requirements:
   build:
